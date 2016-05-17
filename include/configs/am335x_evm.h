@@ -97,8 +97,8 @@
 		"root=${ramroot} " \
 		"rootfstype=${ramrootfstype}\0" \
 	"loadramdisk=load mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
-	"loadimage=load mmc ${bootpart} ${loadaddr} ${bootdir}/${bootfile}\0" \
-	"loadfdt=load mmc ${bootpart} ${fdtaddr} ${bootdir}/${fdtfile}\0" \
+	"loadimage=load mmc ${bootpart} ${loadaddr} ${bootfile}\0" \
+	"loadfdt=load mmc ${bootpart} ${fdtaddr} ${fdtfile}\0" \
 	"mmcloados=run args_mmc; " \
 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
 			"if run loadfdt; then " \
@@ -130,18 +130,7 @@
 		"run ramargs; " \
 		"bootz ${loadaddr} ${rdaddr} ${fdtaddr}\0" \
 	"findfdt="\
-		"if test $board_name = A335BONE; then " \
-			"setenv fdtfile am335x-bone.dtb; fi; " \
-		"if test $board_name = A335BNLT; then " \
-			"setenv fdtfile am335x-boneblack.dtb; fi; " \
-		"if test $board_name = A33515BB; then " \
-			"setenv fdtfile am335x-evm.dtb; fi; " \
-		"if test $board_name = A335X_SK; then " \
-			"setenv fdtfile am335x-evmsk.dtb; fi; " \
-		"if test $board_name = A335_ICE; then " \
-			"setenv fdtfile am335x-icev2.dtb; fi; " \
-		"if test $fdtfile = undefined; then " \
-			"echo WARNING: Could not determine device tree to use; fi; \0" \
+			"setenv fdtfile am335x-evm.dtb; \0" \
 	"init_console=" \
 		"if test $board_name = A335_ICE; then "\
 			"setenv console ttyO3,115200n8;" \

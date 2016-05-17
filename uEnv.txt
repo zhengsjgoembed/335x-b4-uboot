@@ -1,0 +1,18 @@
+##These are needed to be compliant with goembed-b2 or goembed-b4 u-boot.
+
+loadaddr=0x82000000
+fdtaddr=0x88000000
+rdaddr=0x88080000
+
+initrd_high=0xffffffff
+fdt_high=0xffffffff
+
+
+loadximage=load mmc 0:1 ${loadaddr} zImage
+loadxfdt=load mmc 0:1 ${fdtaddr} am335x-evm.dtb
+check_dtb=setenv fdtfile am335x-evm.dtb;
+loadall=run check_dtb; run loadximage;  run loadxfdt;
+
+mmcargs=setenv bootargs console=tty0 console=${console} ${optargs}  root=/dev/mmcblk0p2 rw rootfstype=${mmcrootfstype} 
+
+uenvcmd=run loadall; run mmcargs; bootz ${loadaddr} -  ${fdtaddr};

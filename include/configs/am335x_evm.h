@@ -147,7 +147,8 @@
 	"run init_console; " \
 	"run mmcboot;" \
 	"setenv mmcdev 1; " \
-	"setenv bootpart 1:2; " \
+	"setenv bootpart 1:1; " \
+	"setenv finduuid part uuid mmc 1:2 uuid ;" \
 	"run mmcboot;" \
 	"run nandboot;"
 
